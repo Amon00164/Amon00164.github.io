@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>tauri 学习 | Takahashi</title><meta name="author" content="Seirios"><meta name="copyright" content="Seirios"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Tuari 项目结构JavaScript 项目位于顶层 src，Rust 项目位于 src-tauri 目录下。 src-tauri 内部机构 tauri.conf.json: Tauri 主配置文件，包含从应用程序标识符到开发服务器 URL 的所有内容。该文件是 Tauri CLI 用于查找 Rust 项目的标记。— 标记文件  capabilities&#x2F;: Tauri 读取能力的默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tauri 学习">
+<meta property="og:url" content="http://example.com/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Takahashi">
+<meta property="og:description" content="Tuari 项目结构JavaScript 项目位于顶层 src，Rust 项目位于 src-tauri 目录下。 src-tauri 内部机构 tauri.conf.json: Tauri 主配置文件，包含从应用程序标识符到开发服务器 URL 的所有内容。该文件是 Tauri CLI 用于查找 Rust 项目的标记。— 标记文件  capabilities&#x2F;: Tauri 读取能力的默认">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/covers/cover4.png">
+<meta property="article:published_time" content="2025-09-01T03:04:26.000Z">
+<meta property="article:modified_time" content="2025-09-01T03:04:29.000Z">
+<meta property="article:author" content="Seirios">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/covers/cover4.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "tauri 学习",
+  "url": "http://example.com/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/",
+  "image": "http://example.com/img/covers/cover4.png",
+  "datePublished": "2025-09-01T03:04:26.000Z",
+  "dateModified": "2025-09-01T03:04:29.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Seirios",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Seirios","link":"链接: ","source":"来源: Takahashi","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'tauri 学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/assets/header.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/covers/cover4.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Takahashi</span></a><a class="nav-page-title" href="/"><span class="site-name">tauri 学习</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">tauri 学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-01T03:04:26.000Z" title="发表于 2025-09-01 11:04:26">2025-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-01T03:04:29.000Z" title="更新于 2025-09-01 11:04:29">2025-09-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-09-01 11:04:29&quot;}" hidden></div><h1 id="Tuari-项目结构"><a href="#Tuari-项目结构" class="headerlink" title="Tuari 项目结构"></a>Tuari 项目结构</h1><p>JavaScript 项目位于顶层 src，<br>Rust 项目位于 src-tauri 目录下。</p>
+<h2 id="src-tauri-内部机构"><a href="#src-tauri-内部机构" class="headerlink" title="src-tauri 内部机构"></a>src-tauri 内部机构</h2><ul>
+<li><p>tauri.conf.json: Tauri 主配置文件，包含从应用程序标识符到开发服务器 URL 的所有内容。该文件是 Tauri CLI 用于查找 Rust 项目的标记。<br>— 标记文件</p>
+</li>
+<li><p>capabilities&#x2F;: Tauri 读取能力的默认文件夹（给权限，给能力，在此处允许命令才能被调用）<br>— 程序运行所需的权限</p>
+</li>
+<li><p>icons&#x2F;: tauri icon 命令的默认输出目录，通常在 tarui.conf.json &gt; bundle &gt; icon 中引用，并用于应用程序的图标。<br>— 应用程序图标</p>
+</li>
+<li><p>build.rs: 包含 tauri_bind::build()，用于 Tauri 的构建系统。<br>— 用于 Tauri 构建系统</p>
+</li>
+<li><p>src&#x2F;lib.rs: 包含 Rust 代码和移动端入口点（标记为 #[cfg_attr(mobile, tauri::mobile_entry_point)] 的函数），我们不直接在 main.rs 中编写代码的原因是，在移动端构建中，我们会将您的应用程序编译成一个库，并通过平台框架加载它们。<br>— 移动端入口点，不直接在此文件中编写代码，因为构建移动端中，将应用程序编译成一个库</p>
+</li>
+<li><p>src&#x2F;main.rs: 是桌面应用程序的主要入口点，我们在 main 中运行 tauri_app_lib::run() 以使用与移动端相同的入口点，因此为简单起见请勿修改此文件，请修改 lib.rs。<br>— 桌面程序入口点</p>
+</li>
+</ul>
+<h1 id="Tauri-工作方式"><a href="#Tauri-工作方式" class="headerlink" title="Tauri 工作方式"></a>Tauri 工作方式</h1><p>工作方式类似于静态 Web 主机，其构建方式是您首先将 JavaScript 项目编译为静态文件，然后编译 Rust 项目，该项目将这些静态文件捆绑一起，因此 JavaScript 项目的设置与构建静态网站基本相同。</p>
+<p>只使用 Rust 代码，只需要删除所有其他内容，并将 src-tauri&#x2F; 文件夹用作顶层项目或 Rust 工作区的一个成员。</p>
+<h1 id="Tauri-前端配置"><a href="#Tauri-前端配置" class="headerlink" title="Tauri 前端配置"></a>Tauri 前端配置</h1><h2 id="Leptos"><a href="#Leptos" class="headerlink" title="Leptos"></a>Leptos</h2><p>Leptos 是一个基于 Rust 的Web框架。指南截至 Leptos 0.6 版本都是准确的</p>
+<h3 id="清单"><a href="#清单" class="headerlink" title="清单"></a>清单</h3><ul>
+<li>使用 SSG, Tauri 不正式支持基于服务器的解决方案。</li>
+<li>使用 serve.ws_protocol &#x3D; “ws”, 以便热重载 websocket 可以正确连接以进行移动开发。</li>
+<li>启用 withGlobalTauri 以确保 Tauri API 在window.<strong>TAURI</strong> 变量中可用，并且可以使用 wasm-bindgen导入。</li>
+</ul>
+<h3 id="示例配置"><a href="#示例配置" class="headerlink" title="示例配置"></a>示例配置</h3><ul>
+<li>更新 Tauri 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">src-tauri/tauri.conf.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;build&quot;: &#123;</span><br><span class="line">        &quot;deforeDevCommand&quot;: &quot;trunk serve&quot;,</span><br><span class="line">        &quot;devUrl&quot;: &quot;https://:1420&quot;,</span><br><span class="line">        &quot;beforeBuildCommand&quot;: &quot;trunk build&quot;,</span><br><span class="line">        &quot;distDir&quot;: &quot;../dist&quot;,</span><br><span class="line">    &#125;</span><br><span class="line">    &quot;app&quot;: &#123;</span><br><span class="line">        &quot;withGlobalTauri&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 Trunk 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Trunk.toml</span><br><span class="line">[build]</span><br><span class="line">target = &quot;./index.html&quot;</span><br><span class="line"></span><br><span class="line">[watch]</span><br><span class="line">ignore = [&quot;./src-tauri&quot;]</span><br><span class="line"></span><br><span class="line">[serve]</span><br><span class="line">port = 1420</span><br><span class="line">open = false</span><br><span class="line">ws_protocol = &quot;ws&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Next-js"><a href="#Next-js" class="headerlink" title="Next.js"></a>Next.js</h2><p>Next.js 是一个基于 React 的元框架。指南适用于 Next.js 14.2.3 版本</p>
+<h3 id="清单-1"><a href="#清单-1" class="headerlink" title="清单"></a>清单</h3><ul>
+<li>通过设置 output: ‘export’ 使用静态导出。 Tauri 不支持基于服务器的解决方案。</li>
+<li>在 tauri.conf.json 中使用 out 目录作为 frontendDist。</li>
+</ul>
+<h3 id="示例配置-1"><a href="#示例配置-1" class="headerlink" title="示例配置"></a>示例配置</h3><ul>
+<li>更新 Tauri 配置<br>(npm, yarn, pnpm, deno)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">src-tauri/tauri.conf.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;build&quot;: &#123;</span><br><span class="line">        &quot;beforeDevCommand&quot;: &quot;npm(yarn,pnpm) run dev&quot; || &quot;deno task dev&quot;,</span><br><span class="line">        &quot;beforeBuildCommand&quot;: &quot;npm(yarn,pnpm) run build&quot; || &quot;deno task build&quot;,</span><br><span class="line">        &quot;devUrl&quot;: &quot;https://:3000&quot;,</span><br><span class="line">        &quot;frontendDist&quot;: &quot;../out&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 Next.js 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">next.config.mjs</span><br><span class="line"></span><br><span class="line">const isProd = process.env.NODE_ENV === &#x27;production&#x27;;</span><br><span class="line"></span><br><span class="line">const internalHost = process.env.TAURI_DEV_HOST || &#x27;localhost&#x27;;</span><br><span class="line"></span><br><span class="line">/** @type &#123;import(&#x27;next&#x27;).NextConfig&#125; */</span><br><span class="line">const nextConfig = &#123;</span><br><span class="line">    // Ensure Next.js uses SSG instead of SSR</span><br><span class="line">    // https://nextjs.net.cn/docs/pages/building-your-application/deploying/static-exports</span><br><span class="line">    output: &#x27;export&#x27;,</span><br><span class="line">    // Note: This feature is required to use the Next.js Image component in SSG mode.</span><br><span class="line">    // See https://nextjs.net.cn/docs/messages/export-image-api for different workarounds.</span><br><span class="line">    images: &#123;</span><br><span class="line">        unoptimized: true,</span><br><span class="line">    &#125;,</span><br><span class="line">    // Configure assetPrefix or else the server won&#x27;t properly resolve your assets.</span><br><span class="line">    assetPrefix: isProd ? undefined : `http://$&#123;internalHost&#125;:3000`,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default nextConfig;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 package.json 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package.json</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;next dev&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;next build&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;next start&quot;,</span><br><span class="line">    &quot;lint&quot;: &quot;next lint&quot;,</span><br><span class="line">    &quot;tauri&quot;: &quot;tauri&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nuxt"><a href="#Nuxt" class="headerlink" title="Nuxt"></a>Nuxt</h2><p>Nuxt 是一个用于 Vue 的元框架。指南适用于 Nuxt 3.17。</p>
+<h3 id="清单-2"><a href="#清单-2" class="headerlink" title="清单"></a>清单</h3><ul>
+<li>通过设置 ssr: false 使用 SSG。 Tauri 不支持基于服务器的解决方案。</li>
+<li>在 tauri.conf.json 中使用默认的 ..&#x2F;dist 作为 frontendDist。</li>
+<li>使用 nuxi build 编译</li>
+<li>在 nuxt.config.ts 中设置 telemetry: false 禁用遥测（可选）</li>
+</ul>
+<h3 id="示例配置-2"><a href="#示例配置-2" class="headerlink" title="示例配置"></a>示例配置</h3><ul>
+<li>更新 Tauri 配置<br>(npm, yarn, pnpm, deno)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">src-tauri/tauri.conf.json</span><br><span class="line">与 Next.js 相同的更新配置</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 Nuxt 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">export default defineNuxtConfig(&#123;</span><br><span class="line">  compatibilityDate: &#x27;2025-05-15&#x27;,</span><br><span class="line">  // (optional) Enable the Nuxt devtools</span><br><span class="line">  devtools: &#123; enabled: true &#125;,</span><br><span class="line">  // Enable SSG</span><br><span class="line">  ssr: false,</span><br><span class="line">  // Enables the development server to be discoverable by other devices when running on iOS physical devices</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    host: &#x27;0&#x27;,</span><br><span class="line">  &#125;,</span><br><span class="line">  vite: &#123;</span><br><span class="line">    // Better support for Tauri CLI output</span><br><span class="line">    clearScreen: false,</span><br><span class="line">    // Enable environment variables</span><br><span class="line">    // Additional environment variables can be found at</span><br><span class="line">    // https://v2.tauri.org.cn/reference/environment-variables/</span><br><span class="line">    envPrefix: [&#x27;VITE_&#x27;, &#x27;TAURI_&#x27;],</span><br><span class="line">    server: &#123;</span><br><span class="line">      // Tauri requires a consistent port</span><br><span class="line">      strictPort: true,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  // Avoids error [unhandledRejection] EMFILE: too many open files, watch</span><br><span class="line">  ignore: [&#x27;**/src-tauri/**&#x27;],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Qwik"><a href="#Qwik" class="headerlink" title="Qwik"></a>Qwik</h2><p>Qwik Web 框架是一个为构建高性能的 Web 应用程序而设计的前端 JavaScript框架。</p>
+<h3 id="清单-3"><a href="#清单-3" class="headerlink" title="清单"></a>清单</h3><ul>
+<li>使用 SSG。Tauri 不支持基于服务器的解决方案。</li>
+<li>tauri.conf.json 中使用 dist&#x2F; 作为 frontendDist。</li>
+</ul>
+<h3 id="示例配置-3"><a href="#示例配置-3" class="headerlink" title="示例配置"></a>示例配置</h3><ul>
+<li>创建新的 Qwik 应用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm || yarn || pnpm create qwik@latest</span><br><span class="line">(deno)deno run -A npm:create-qwik@latest</span><br><span class="line">cd &lt;PROJECT&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 static adapter</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm || yarn || pnpm run qwik add static</span><br><span class="line">(deno)deno task qwik add static</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将 Tauri CLI 添加到项目</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm || yarn || pnpm install -D @tauri-apps/cli@latest</span><br><span class="line">(deno)deno add -D npm:@tauri-apps/cli@latest</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动新的 Tauri 项目</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm || yarn || pnpm run tauri init</span><br><span class="line">(deno)deno task tauri init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Tauri 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tauri.conf.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;build&quot;: &#123;</span><br><span class="line">    &quot;devUrl&quot;: &quot;https://:5173&quot;</span><br><span class="line">    &quot;frontendDist&quot;: &quot;../dist&quot;,</span><br><span class="line">    &quot;beforeDevCommand&quot;: &quot;npm || yarn || pnpm run dev || deno task dev&quot;,</span><br><span class="line">    &quot;beforeBuildCommand&quot;: &quot;npm || yarn || pnpm run build || deno task build&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动 tauri 项目</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm || yarn || pnpm run tauri dev || deno tasj tauri dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="Trunk"><a href="#Trunk" class="headerlink" title="Trunk"></a>Trunk</h2><h3 id="清单-4"><a href="#清单-4" class="headerlink" title="清单"></a>清单</h3><ul>
+<li>使用 SSG，Tauri 不正式支持基于服务器的解决方案。</li>
+<li>使用 serve.ws_protocol &#x3D; “ws” 以便热重载 websocket 可以正确连接进行移动开发。</li>
+<li>启用 withGlobalTauri 以确保 Tauri API 在 window.<strong>TAURI</strong> 变量中可用，并且可以使用 wasm-bindgen 导入。</li>
+</ul>
+<h3 id="示例配置-4"><a href="#示例配置-4" class="headerlink" title="示例配置"></a>示例配置</h3><ul>
+<li>更新 Tauri 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tauri.conf.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;build&quot;: &#123;</span><br><span class="line">    &quot;beforeDevCommand&quot;: &quot;trunk serve&quot;,</span><br><span class="line">    &quot;beforeBuildCommand&quot;: &quot;trunk build&quot;,</span><br><span class="line">    &quot;devUrl&quot;: &quot;https://:8080&quot;,</span><br><span class="line">    &quot;frontendDist&quot;: &quot;../dist&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;app&quot;: &#123;</span><br><span class="line">    &quot;withGlobalTauri&quot;: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 Tauri 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Trunk.toml</span><br><span class="line">[watch]</span><br><span class="line">ignore = [&quot;./src-tauri&quot;]</span><br><span class="line"></span><br><span class="line">[serve]</span><br><span class="line">ws_protocol = &quot;ws&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h2><p>Vite 是一款旨在为现代 Web 项目提供更快、更精简开发体验的构建工具。</p>
+<h3 id="清单-5"><a href="#清单-5" class="headerlink" title="清单"></a>清单</h3><ul>
+<li>在 src-tauri&#x2F;tauri.conf.json 中将 ..&#x2F;dist 用作 frontendDist。</li>
+<li>当设置为在 iOS 物理设备上运行时，将 process.env.TAURI_DEV_HOST 用作开发服务器主机IP。</li>
+</ul>
+<h3 id="示例配置-5"><a href="#示例配置-5" class="headerlink" title="示例配置"></a>示例配置</h3><ul>
+<li>更新 Tauri 配置<br>如果 package.json 中有以下 dev 和 build 脚本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;vite&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;tsc &amp;&amp; vite build&quot;,</span><br><span class="line">    &quot;preview&quot;: &quot;vite preview&quot;,</span><br><span class="line">    &quot;tauri&quot;: &quot;tauri&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">可以配置 Tauri CLI 使用 Vite 开发服务器和 dist 文件夹，并使用钩子自动运行 Vite 脚本</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;build&quot;: &#123;</span><br><span class="line">    &quot;beforeDevCommand&quot;: &quot;npm run dev&quot;,</span><br><span class="line">    &quot;beforeBuildCommand&quot;: &quot;npm run build&quot;,</span><br><span class="line">    &quot;devUrl&quot;: &quot;https://:5173&quot;,</span><br><span class="line">    &quot;frontendDist&quot;: &quot;../dist&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新 Vite 配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import &#123; defineConfig &#125; from &#x27;vite&#x27;;</span><br><span class="line"></span><br><span class="line">const host = process.env.TAURI_DEV_HOST;</span><br><span class="line"></span><br><span class="line">export default defineConfig(&#123;</span><br><span class="line">  // prevent vite from obscuring rust errors</span><br><span class="line">  clearScreen: false,</span><br><span class="line">  server: &#123;</span><br><span class="line">    // make sure this port matches the devUrl port in tauri.conf.json file</span><br><span class="line">    port: 5173,</span><br><span class="line">    // Tauri expects a fixed port, fail if that port is not available</span><br><span class="line">    strictPort: true,</span><br><span class="line">    // if the host Tauri is expecting is set, use it</span><br><span class="line">    host: host || false,</span><br><span class="line">    hmr: host</span><br><span class="line">      ? &#123;</span><br><span class="line">          protocol: &#x27;ws&#x27;,</span><br><span class="line">          host,</span><br><span class="line">          port: 1421,</span><br><span class="line">        &#125;</span><br><span class="line">      : undefined,</span><br><span class="line"></span><br><span class="line">    watch: &#123;</span><br><span class="line">      // tell vite to ignore watching `src-tauri`</span><br><span class="line">      ignored: [&#x27;**/src-tauri/**&#x27;],</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  // Env variables starting with the item of `envPrefix` will be exposed in tauri&#x27;s source code through `import.meta.env`.</span><br><span class="line">  envPrefix: [&#x27;VITE_&#x27;, &#x27;TAURI_ENV_*&#x27;],</span><br><span class="line">  build: &#123;</span><br><span class="line">    // Tauri uses Chromium on Windows and WebKit on macOS and Linux</span><br><span class="line">    target:</span><br><span class="line">      process.env.TAURI_ENV_PLATFORM == &#x27;windows&#x27;</span><br><span class="line">        ? &#x27;chrome105&#x27;</span><br><span class="line">        : &#x27;safari13&#x27;,</span><br><span class="line">    // don&#x27;t minify for debug builds</span><br><span class="line">    minify: !process.env.TAURI_ENV_DEBUG ? &#x27;esbuild&#x27; : false,</span><br><span class="line">    // produce sourcemaps for debug builds</span><br><span class="line">    sourcemap: !!process.env.TAURI_ENV_DEBUG,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="为移动端做准备"><a href="#为移动端做准备" class="headerlink" title="为移动端做准备"></a>为移动端做准备</h1><p>Tauri 的移动端端口要求项目输出一个共享库。<br>如果应用程序面向移动端，则需将 crate 更改为除了桌面可执行文件之外，还生成这种类型的 artifact。</p>
+<ul>
+<li><ol>
+<li>更改 Cargo 清单以生成库。追加以下块</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src-tauri/Cargo.toml</span><br><span class="line">[lib]</span><br><span class="line">name = &quot;app_lib&quot;</span><br><span class="line">crate-type = [&quot;staticlib&quot;, &quot;cdylib&quot;, &quot;rlib&quot;]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ol start="2">
+<li>将 src-tauri&#x2F;src&#x2F;main.rs 重命名为 src-tauri&#x2F;src&#x2F;lib.rs。此文件将由桌面和移动端目标共享。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>将 lib.rs 中的 main 函数头重命名为以下内容</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">src-tauri/src/lib.rs</span><br><span class="line">#[cfg_attr(mobile, tauri::mobile_entry_point)]</span><br><span class="line">pub fn run() &#123;</span><br><span class="line">    // your code here</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tauri::mobile_entry_point 宏将函数准备好在移动端执行</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ol start="4">
+<li>重新创建调用共享运行函数的 main.rs 文件</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">src-tauri/src/main.rs</span><br><span class="line">#![cfg_attr(not(debug_assertions), windows_subsystem = &quot;windows&quot;)]</span><br><span class="line"></span><br><span class="line">fn main() &#123;</span><br><span class="line">  app_lib::run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Seirios</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/">http://example.com/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Takahashi</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a></div><div class="post-share"><div class="social-share" data-image="/img/covers/cover4.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/08/22/page2/" title="你好，hexo"><img class="cover" src="/img/covers/cover2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">你好，hexo</div></div><div class="info-2"><div class="info-item-1">你好，hexo介绍这是我第一次用hexo搭建博客，这是测试的文章你好，hexo！ footer: © 2025-2025 All rights reserved. </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/assets/header.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Seirios</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Amon00164" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2277532452@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Tuari-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">Tuari 项目结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#src-tauri-%E5%86%85%E9%83%A8%E6%9C%BA%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">src-tauri 内部机构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tauri-%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">Tauri 工作方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tauri-%E5%89%8D%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">Tauri 前端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Leptos"><span class="toc-number">3.1.</span> <span class="toc-text">Leptos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E5%8D%95"><span class="toc-number">3.1.1.</span> <span class="toc-text">清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE"><span class="toc-number">3.1.2.</span> <span class="toc-text">示例配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Next-js"><span class="toc-number">3.2.</span> <span class="toc-text">Next.js</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E5%8D%95-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">示例配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nuxt"><span class="toc-number">3.3.</span> <span class="toc-text">Nuxt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E5%8D%95-2"><span class="toc-number">3.3.1.</span> <span class="toc-text">清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE-2"><span class="toc-number">3.3.2.</span> <span class="toc-text">示例配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Qwik"><span class="toc-number">3.4.</span> <span class="toc-text">Qwik</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E5%8D%95-3"><span class="toc-number">3.4.1.</span> <span class="toc-text">清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE-3"><span class="toc-number">3.4.2.</span> <span class="toc-text">示例配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trunk"><span class="toc-number">3.5.</span> <span class="toc-text">Trunk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E5%8D%95-4"><span class="toc-number">3.5.1.</span> <span class="toc-text">清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE-4"><span class="toc-number">3.5.2.</span> <span class="toc-text">示例配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vite"><span class="toc-number">3.6.</span> <span class="toc-text">Vite</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E5%8D%95-5"><span class="toc-number">3.6.1.</span> <span class="toc-text">清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE-5"><span class="toc-number">3.6.2.</span> <span class="toc-text">示例配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%81%9A%E5%87%86%E5%A4%87"><span class="toc-number">4.</span> <span class="toc-text">为移动端做准备</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/" title="tauri 学习"><img src="/img/covers/cover4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tauri 学习"/></a><div class="content"><a class="title" href="/2025/09/01/tauri-%E5%AD%A6%E4%B9%A0/" title="tauri 学习">tauri 学习</a><time datetime="2025-09-01T03:04:26.000Z" title="发表于 2025-09-01 11:04:26">2025-09-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/22/page2/" title="你好，hexo"><img src="/img/covers/cover2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="你好，hexo"/></a><div class="content"><a class="title" href="/2025/08/22/page2/" title="你好，hexo">你好，hexo</a><time datetime="2025-08-22T13:17:19.000Z" title="发表于 2025-08-22 21:17:19">2025-08-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2022 - 2025 By Seirios</span></div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ "><img src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ "><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
